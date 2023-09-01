@@ -1,0 +1,28 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: smartvillage-traffic-light-controller-sumo
+  namespace: redhat-ods-applications
+  labels:
+    opendatahub.io/notebook-image: "true"
+  annotations:
+    opendatahub.io/notebook-image-url: "https://github.com/computate-org/TLC/tree/computate-api"
+    opendatahub.io/notebook-image-name: "Smart Village Traffic Light Controller SUMO Python"
+    opendatahub.io/notebook-image-desc: |-
+      A Traffic Light Controller Simulator written in Python using the SUMO library. 
+      Used by the Smarta Byar Smart Village Community to perform traffic simulations 
+      for testing out new traffic patterns in actual locations around the world. 
+spec:
+  lookupPolicy:
+    local: true
+  tags:
+    - name: latest
+      annotations: null
+      from:
+        kind: DockerImage
+        name: 'quay.io/computateorg/smartvillage-traffic-light-controller-sumo:computate-api'
+      importPolicy:
+        scheduled: true
+      referencePolicy:
+        type: Source
+        
